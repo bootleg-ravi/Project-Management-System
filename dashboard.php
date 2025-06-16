@@ -297,12 +297,12 @@ $stmt->close();
 <?php if (isset($_GET['workspace_id'])):
     $workspace_id = intval($_GET['workspace_id']);
 
-    $stmt = $conn->prepare("SELECT COUNT(*) AS total_boards FROM boards WHERE workspace_id = ?");
-    $stmt->bind_param("i", $workspace_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $total_boards = $result->fetch_assoc()['total_boards'] ?? 0;
-    $stmt->close();
+    $stmt = $conn->prepare("SELECT COUNT(*) AS total_boards FROM boards WHERE workspace_id = ? AND archived = 0");
+$stmt->bind_param("i", $workspace_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$total_boards = $result->fetch_assoc()['total_boards'] ?? 0;
+$stmt->close();
 
     $stmt = $conn->prepare("SELECT COUNT(*) AS due_tasks FROM tasks 
         WHERE board_id IN (SELECT id FROM boards WHERE workspace_id = ?) 
