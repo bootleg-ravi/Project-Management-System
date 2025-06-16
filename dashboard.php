@@ -5,7 +5,7 @@ require_once "config.php";
 $workspace_id = $_GET['workspace_id'] ?? 0;
 $user_id = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("SELECT * FROM boards WHERE workspace_id = ? AND is_archived = 0");
+$stmt = $conn->prepare("SELECT * FROM boards WHERE workspace_id = ? AND archived = 0");
 $stmt->bind_param("i", $workspace_id);
 $stmt->execute();
 $boards = $stmt->get_result();
@@ -34,6 +34,7 @@ $stmt->close();
   <title>Dashboard - Stratify</title>
   <link rel="stylesheet" href="assets/css/dashboard.css" />
   <link rel="stylesheet" href="assets/css/stratify-modern.css" />
+  <script src="/stratify/assets/fullcalendar/index.global.min.js"></script>
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -273,6 +274,26 @@ $stmt->close();
     <a href="notifications.php">🔔 <?php echo $unread > 0 ? "($unread)" : ""; ?></a>
   </div>
 </header>
+
+<div class="calendar-container">
+  <div id="calendar"></div>
+</div>
+
+<style>
+  .calendar-container {
+    max-width: 750px;
+    margin: 20px auto;
+    padding: 10px;
+    background: transparent;
+    border-radius: 6px;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.1);
+  }
+  #calendar {
+    width: 100%;
+    min-height: 50px;
+  }
+</style>
+
 <?php if (isset($_GET['workspace_id'])):
     $workspace_id = intval($_GET['workspace_id']);
 
@@ -325,15 +346,17 @@ $stmt->close();
   </div>
 </section>
 <?php endif; ?>
+
       <?php if (isset($_GET['workspace_id'])):
           $workspace_id = intval($_GET['workspace_id']);
-          $stmt = $conn->prepare("SELECT * FROM boards WHERE workspace_id = ?");
+          $stmt = $conn->prepare("SELECT * FROM boards WHERE workspace_id = ? AND archived = 0");
           $stmt->bind_param("i", $workspace_id);
           $stmt->execute();
           $boards = $stmt->get_result();
       ?>
         <section class="board-list">
           <h3>📋 Boards in This Workspace</h3>
+
           <ul>
   <?php while ($board = $boards->fetch_assoc()): ?>
     <li style="display: flex; justify-content: space-between; align-items: center;">
@@ -359,6 +382,8 @@ $stmt->close();
     </li>
   <?php endwhile; ?>
 </ul>
+
+<a href="archived_boards.php?workspace_id=<?= $workspace_id ?>">📦 View Archived Boards</a>
 
           <form action="backend/create_board.php" method="POST">
             <input type="hidden" name="workspace_id" value="<?php echo $workspace_id; ?>">
@@ -411,6 +436,28 @@ function openEditWorkspaceModal(workspaceId) {
   <button id="closeModalBtn" style="float:right; background:none; border:none; font-size:20px; cursor:pointer;">&times;</button>
   <div id="modalContent"></div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    if (!calendarEl) return;
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: '/stratify/backend/get_deadlines.php',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: ''
+      },
+      height: 'auto'
+    });
+
+    calendar.render();
+  });
+</script>
 
 
   <footer>

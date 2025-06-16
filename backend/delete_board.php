@@ -25,8 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['board_id'])) {
         $stmt->close();
 
         $_SESSION['flash'] = "Board deleted.";
+    } else {
+        $_SESSION['flash'] = "Unauthorized or board not found.";
     }
-}
 
-header("Location: ../dashboard.php?workspace_id=" . $workspace_id);
-exit();
+    header("Location: ../dashboard.php?workspace_id=" . $workspace_id);
+    exit();
+}

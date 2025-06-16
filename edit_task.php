@@ -156,7 +156,6 @@ $users_result = $conn->query("SELECT id, full_name FROM users ORDER BY full_name
     <button type="submit" class="btn-submit">Save Changes</button>
   </form>
 
-<button id="openCommentModalBtn">Add Comment</button>
 
 <div id="commentModal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border:1px solid #ccc; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:1000;">
   <h3>Comments</h3>
