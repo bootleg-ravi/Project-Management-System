@@ -169,7 +169,6 @@
 <body>
 
   <div class="top-bar">
-  <img src="f10dca58-86b7-449c-ad89-41594df34f91-removebg-preview.png" alt="f10dca58-86b7-449c-ad89-41594df34f91.jpg">
     <div class="logo">● Stratify</div>
     <a href="register.php">SIGN UP</a>
   </div>
