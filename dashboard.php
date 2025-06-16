@@ -216,6 +216,7 @@ $stmt->close();
   <div class="dashboard">
     <aside class="sidebar">
       <div>
+	  <img src="logo.png" alt="Site Logo" class="logo">
         <div class="brand">Stratify</div>
         <div class="user-info">
   <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>" style="text-decoration: none; color: inherit;">
