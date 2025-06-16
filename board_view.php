@@ -97,6 +97,13 @@ if (!$board) {
     border-radius: 8px;
   }
 
+  .board-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
   .kanban-board {
     display: flex;
     gap: 20px;
@@ -307,10 +314,10 @@ if (!$board) {
     <a href="dashboard.php" class="back-link">← Back to Dashboard</a>
   </aside>
 
-  <main class="main-content">
-    <header class="topbar">
-      <h2><?= htmlspecialchars($board['name']) ?> – Tasks</h2>
-    </header>
+<main class="main-content">
+  <header class="topbar">
+    <h2 class="board-title"><?= htmlspecialchars($board['name']) ?> – Tasks</h2>
+  </header>
 
     <section class="task-form">
       <form action="backend/add_task.php" method="POST">

@@ -2,13 +2,11 @@
 session_start();
 require_once "config.php";
 
-// Determine profile ID
 $profile_id = isset($_GET['id']) ? intval($_GET['id']) : ($_SESSION['user_id'] ?? null);
 if (!$profile_id) die("No profile ID and no user logged in.");
 
 $is_own_profile = isset($_SESSION['user_id']) && $_SESSION['user_id'] == $profile_id;
 
-// Fetch profile data
 $stmt = $conn->prepare("SELECT id, full_name, bio, avatar FROM users WHERE id = ?");
 $stmt->bind_param("i", $profile_id);
 $stmt->execute();
@@ -16,7 +14,6 @@ $user = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 if (!$user) die("User not found.");
 
-// Handle profile update
 $upload_error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $is_own_profile) {
     $new_name = trim($_POST['full_name']);
@@ -98,16 +95,19 @@ while ($row = $res->fetch_assoc()) {
     min-height: 100vh;
   }
 
-  .content-wrapper {
+.content-wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch; 
   width: 100%;
 }
 
+
 .main-content {
-  padding: 20px;
+  padding: 30px;
+  margin: 0 auto;
+  max-width: 860px;
   box-sizing: border-box;
 }
 

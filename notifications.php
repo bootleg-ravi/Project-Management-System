@@ -23,105 +23,117 @@ $notifications = $stmt->get_result();
   <title>Notifications - Stratify</title>
   <link rel="stylesheet" href="assets/css/dashboard.css" />
   <link rel="stylesheet" href="assets/css/stratify-modern.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+ <style>
+  * {
+    box-sizing: border-box;
+  }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f8;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f8;
+    width: 100%;
+  }
 
-    .dashboard {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center; 
+  }
 
-    .main-content {
-      flex: 1;
-    }
+  .dashboard {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .notifications-container {
-      max-width: 700px;
-      margin: 50px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
+  .main-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
-    .notifications-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+  .notifications-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 50px 0;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
 
-    .notifications-header h2 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
+  .notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-    .notifications-header a {
-      font-size: 0.9rem;
-      text-decoration: none;
-      color: #0073ea;
-    }
+  .notifications-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+  }
 
-    .notifications-header a:hover {
-      text-decoration: underline;
-    }
+  .notifications-header a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #0073ea;
+  }
 
-    .notification-item {
-      border-left: 4px solid #0073ea;
-      background: #f9fafc;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      padding: 15px 20px;
-      transition: background 0.3s ease;
-    }
+  .notifications-header a:hover {
+    text-decoration: underline;
+  }
 
-    .notification-item:hover {
-      background: #eef2f7;
-    }
+  .notification-item {
+    border-left: 4px solid #0073ea;
+    background: #f9fafc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    transition: background 0.3s ease;
+  }
 
-    .notification-item strong {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #333;
-    }
+  .notification-item:hover {
+    background: #eef2f7;
+  }
 
-    .notification-item small {
-      color: #888;
-      font-size: 0.8rem;
-      display: block;
-      margin-top: 6px;
-    }
+  .notification-item strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+  }
 
-    .no-notifications {
-      text-align: center;
-      color: #666;
-      font-style: italic;
-      margin-top: 30px;
-    }
+  .notification-item small {
+    color: #888;
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 6px;
+  }
 
-    footer {
-      background: #f0f0f0;
-      padding: 15px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #555;
-      border-top: 1px solid #ddd;
-    }
-  </style>
+  .no-notifications {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-top: 30px;
+  }
+
+  footer {
+    background: #f0f0f0;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+    border-top: 1px solid #ddd;
+    width: 100%;
+  }
+</style>
 </head>
 <body>
   <div class="dashboard">

@@ -1,3 +1,6 @@
+<?php
+  $error = $_GET['error'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +8,7 @@
   <title>Login - Stratify</title>
   <link rel="stylesheet" href="assets/css/stratify-modern.css" />
   <style>
-    html, body {
+       html, body {
       margin: 0;
       padding: 0;
       height: 100%;
@@ -121,11 +124,52 @@
       padding: 20px;
       color: #666;
     }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #e53e3e;
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      background: #e53e3e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .close-btn:hover {
+      background: #c53030;
+    }
   </style>
 </head>
 <body>
 
   <div class="top-bar">
+  <img src="f10dca58-86b7-449c-ad89-41594df34f91-removebg-preview.png" alt="f10dca58-86b7-449c-ad89-41594df34f91.jpg">
     <div class="logo">● Stratify</div>
     <a href="register.php">SIGN UP</a>
   </div>
@@ -156,8 +200,29 @@
   </main>
 
   <div class="footer">
-    &copy; 2025 All Rights Reserved. Stratify.
+    &copy; 2025 Stratify. All Rights Reserved. 
   </div>
+
+  <div class="modal" id="errorModal">
+    <div class="modal-content">
+      <h3>
+        <?php if ($error === 'invalid'): ?>
+          Incorrect password. Please try again.
+        <?php elseif ($error === 'notfound'): ?>
+          User does not exist. Please sign up.
+        <?php endif; ?>
+      </h3>
+      <button class="close-btn" onclick="document.getElementById('errorModal').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <script>
+    <?php if ($error): ?>
+      window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('errorModal').style.display = 'flex';
+      });
+    <?php endif; ?>
+  </script>
 
 </body>
 </html>

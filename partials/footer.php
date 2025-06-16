@@ -1,5 +1,5 @@
 <footer class="footer">
-&copy; 2025 All Rights Reserved. Stratify.
+&copy; 2025 Stratify. All Rights Reserved.
 </footer>
 
 <style>
