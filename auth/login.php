@@ -169,6 +169,7 @@
 <body>
 
   <div class="top-bar">
+  <img src="logo.png" alt="Logo" style="position: absolute; top: 13px; left: 16px; width: 45px; height: auto; z-index: 1000;">
     <div class="logo">● Stratify</div>
     <a href="register.php">SIGN UP</a>
   </div>
